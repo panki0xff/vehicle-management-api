@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: vehicle-management-api
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+
+management:
+  server:
+    port: 8090
+server:
+  port: 8080
