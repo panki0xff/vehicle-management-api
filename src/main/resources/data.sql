@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS vehicle (
-                                       id INT AUTO_INCREMENT PRIMARY KEY,
-                                       vrn VARCHAR(20) NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    vrn VARCHAR(20) NOT NULL,
     make VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
     mfg_year INT NOT NULL,
     fuel_type VARCHAR(50) NOT NULL
-    );
+);
 
 
 INSERT INTO Vehicle (vrn, make, model, mfg_year, fuel_type) VALUES ('XYZ123', 'Toyota', 'Camry', 2022, 'Petrol');

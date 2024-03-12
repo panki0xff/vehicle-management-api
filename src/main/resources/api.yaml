@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Vehicle Management
+    description: Endpoints to manage vehicle details
+paths:
+  /vehicle/update/{vrn}:
+    put:
+      tags:
+        - Vehicle Management
+      summary: Update an existing vehicle by VRN
+      operationId: updateVehicle
+      parameters:
+        - name: vrn
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+        required: true
+      responses:
+        "200":
+          description: Vehicle details updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+        "404":
+          description: Vehicle not found with the provided VRN
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+  /vehicle/add:
+    post:
+      tags:
+        - Vehicle Management
+      summary: Add vehicle
+      operationId: addVehicle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+        required: true
+      responses:
+        "400":
+          description: Request Fail
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+  /vehicle/search:
+    get:
+      tags:
+        - Vehicle Management
+      summary: Search for vehicles by VRNs
+      operationId: searchVehiclesByVrns
+      parameters:
+        - name: vrns
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "404":
+          description: No vehicles found with given VRNs
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+        "200":
+          description: List of vehicles found
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Vehicle:
+      required:
+        - fuelType
+        - make
+        - model
+        - vrn
+        - year
+      type: object
+      properties:
+        vrn:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          format: int32
+        fuelType:
+          type: string

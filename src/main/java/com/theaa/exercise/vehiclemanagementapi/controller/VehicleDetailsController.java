@@ -1,5 +1,6 @@
 package com.theaa.exercise.vehiclemanagementapi.controller;
 
+import com.theaa.exercise.vehiclemanagementapi.exception.VrnUnmatchException;
 import com.theaa.exercise.vehiclemanagementapi.repository.model.Vehicle;
 import com.theaa.exercise.vehiclemanagementapi.service.VehicleDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,10 +45,14 @@ public class VehicleDetailsController {
     })
     @PutMapping("/update/{vrn}")
     public ResponseEntity<Vehicle> updateVehicle(@PathVariable String vrn, @RequestBody Vehicle vehicle) {
-        Vehicle updatedVehicle = vehicleDetailsService.updateVehicleByVrn(vrn, vehicle);
-        if (updatedVehicle != null) {
-            return ResponseEntity.ok(updatedVehicle);
-        } else {
+        try {
+            Vehicle updatedVehicle = vehicleDetailsService.updateVehicleByVrn(vrn, vehicle);
+            if (updatedVehicle != null) {
+                return ResponseEntity.ok(updatedVehicle);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (VrnUnmatchException e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -60,7 +65,7 @@ public class VehicleDetailsController {
     @GetMapping("/search")
     public ResponseEntity<List<Vehicle>> searchVehiclesByVrns(@RequestParam List<String> vrns) {
         List<Vehicle> foundVehicles = vehicleDetailsService.searchVehiclesByVrns(vrns);
-        if(!CollectionUtils.isEmpty(foundVehicles)){
+        if (!CollectionUtils.isEmpty(foundVehicles)) {
             return ResponseEntity.ok(foundVehicles);
         } else {
             return ResponseEntity.notFound().build();

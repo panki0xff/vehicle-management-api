@@ -10,4 +10,6 @@ import java.util.List;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     List<Vehicle> findByVrn(String vrn);
+
+    List<Vehicle> findByVrnIn(List<String> vrns);
 }
