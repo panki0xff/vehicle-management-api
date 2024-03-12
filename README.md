@@ -1,6 +1,10 @@
 # Vehicle Management API
 
-This is a RESTful API for managing vehicle details by Java.
+This is a RESTful API for managing vehicle details implemented in Java using the Spring Boot framework. It provides endpoints for customers to add, update, and search for vehicles. The source code is organized into three main components:
+
+- Controller: Handles REST API calls and responds with OpenAPI definitions.
+- Service: Implements the business logic for managing vehicle details.
+- Repository: Provides functions to interact with the database for data access.
 
 ### Assumptions
 - The application assumes using H2 in memory database in the application.
