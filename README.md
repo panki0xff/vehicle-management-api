@@ -41,6 +41,15 @@ This is a RESTful API for managing vehicle details implemented in Java using the
     ```bash
     java -jar target/vehicle-management-api.jar
     ```
+### Accessing the Service
+- The main running path of the service is `http://localhost:8080/vehicle/`. You can use tools like cURL to test the endpoints. For example:
+    ```bash
+    curl -X GET "http://localhost:8080/vehicle/search?vrns=XYZ123"
+    ```
+
+### Actuator
+- The actuator endpoint is accessible at `http://localhost:8090/actuator`. It provides insights into the application's health, metrics, and other operational information.
+
 
 ## API Documentation
 The application sources code is already included a api.yaml for client generation.
